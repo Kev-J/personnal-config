@@ -10,6 +10,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local vicious = require("vicious")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -119,6 +120,44 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
+-- Separator
+separatorR = wibox.widget.textbox()
+separatorR:set_text(" | ")
+
+-- Create a memory usage widget (textbox)
+memwidgetT = wibox.widget.textbox()
+-- Register widget
+vicious.register(memwidgetT, vicious.widgets.mem, " $1% ($2MB/$3MB)", 13)
+
+-- Create a memory usage widget (progressbar)
+memwidgetP = awful.widget.progressbar()
+-- Properties
+memwidgetP:set_width(8)
+memwidgetP:set_height(10)
+memwidgetP:set_vertical(true)
+memwidgetP:set_background_color("#494B4F")
+memwidgetP:set_border_color(nil)
+memwidgetP:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#AECF96"}, {0.5, "#88A175"},
+                    {1, "#FF5656"}}})
+
+-- Register widget
+vicious.register(memwidgetP, vicious.widgets.mem, "$1", 13)
+
+-- Create a CPU textbox
+cpuwidgetT = wibox.widget.textbox()
+-- Register widget
+vicious.register(cpuwidgetT, vicious.widgets.cpu, "$1%")
+
+-- Create a CPU graph
+cpuwidgetG = awful.widget.graph()
+-- Graph properties
+cpuwidgetG:set_width(50)
+cpuwidgetG:set_background_color("#494B4F")
+cpuwidgetG:set_color({ type = "linear", from = { 0, 0 }, to = { 10,0 }, stops = { {0, "#FF5656"}, {0.5, "#88A175"}, 
+                    {1, "#AECF96" }}})
+-- Register widget
+vicious.register(cpuwidgetG, vicious.widgets.cpu, "$1")
+
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
@@ -198,6 +237,12 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(cpuwidgetT)
+    right_layout:add(cpuwidgetG)
+    right_layout:add(separatorR)
+    right_layout:add(memwidgetP)
+    right_layout:add(memwidgetT)
+    right_layout:add(separatorR)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
