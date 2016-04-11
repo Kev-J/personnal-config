@@ -99,6 +99,13 @@ end
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
+mysystemmenu = {
+   { "power-off", "systemctl poweroff" },
+   { "reboot", "systemctl reboot" },
+   { "suspend", "systemctl suspend" },
+   { "hibernate", "systemctl hibernate" }
+}
+
 myawesomemenu = {
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
@@ -108,7 +115,8 @@ myawesomemenu = {
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
                                     { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "system", mysystemmenu }
                                   }
                         })
 
@@ -326,7 +334,10 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- Custom programs
+    awful.key({ modkey,   "Shift" }, "F1", function () awful.util.spawn("gnome-calculator") end)
 )
 
 clientkeys = awful.util.table.join(
