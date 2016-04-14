@@ -12,11 +12,11 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local vicious = require("vicious")
 
+-- Autostart
+require("autostart")
+
 -- Load Debian menu entries
 require("debian.menu")
-
--- Run program only once module
-require("run_once")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -514,7 +514,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 -- {{{ Auto-start
-run_once("nm-applet")
-run_once("numlockx")
-run_once("xscreensaver -no-splash")
+run_autostart()
 -- }}}
