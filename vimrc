@@ -2,9 +2,6 @@ syntax on
 filetype on
 color elflord
 
-set expandtab
-set shiftwidth=4
-set tabstop=4
 set autoindent
 
 " Taglist
@@ -12,6 +9,10 @@ let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 let Tlist_Process_File_Always = 1
 
 autocmd FileType make set noexpandtab
+autocmd FileType cpp,hpp set noexpandtab | set shiftwidth=4 | set tabstop=4
+autocmd FileType c,h set noexpandtab | set shiftwidth=8 | set tabstop=8
+autocmd FileType python set expandtab | set shiftwidth=4 | set softtabstop=4
+
 
 " Match extra whitespaces and spaces before tabs
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -24,7 +25,7 @@ function! ToggleList()
         set nolist
         let g:listToggled = 0
     else
-        set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+        set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<,space:␣
         set list
         let g:listToggled = 1
     endif
