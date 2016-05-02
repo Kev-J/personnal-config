@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 function parse_git_dirty {
-    [[ $(git status 2> /dev/null | tail -n1) != "rien à valider, la copie de travail est propre" ]] && echo -e "\033\[31m⚡\033\[39m"
+    [[ $(git status 2> /dev/null | tail -n1) != "rien à valider, la copie de travail est propre" ]] && echo -e "\033\[93m⚡\033\[39m"
 }
 
 function parse_git_branch {
