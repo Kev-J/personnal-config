@@ -7,15 +7,21 @@ usage() {
 	echo "set-raw-tty.sh [OPTION] [TTY_FILE]"
 	echo ""
 	echo "DESCRIPTION"
-	echo "  -h      Display this help"
+	echo "  -h              Display this help"
+	echo "  -b [baudrate]   Set the baudrate (default 115200)"
 }
 
-while getopts "h" option
+BAUDRATE=115200
+
+while getopts "hb:" option
 do
 	case $option in
 		h)
 			usage
 			exit -2
+			;;
+		b)
+			BAUDRATE=$OPTARG
 			;;
 	esac
 done
@@ -28,4 +34,4 @@ if ! [ "$#" -ne 2 ]; then
 	exit -2
 fi
 
-stty -F $1 raw -echo -echoe -echok -icrnl
+stty -F $1 raw -echo -echoe -echok -icrnl $BAUDRATE
