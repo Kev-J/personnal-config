@@ -9,7 +9,7 @@ let Tlist_Ctags_Cmd = '/usr/bin/ctags'
 let Tlist_Process_File_Always = 1
 
 autocmd FileType make set noexpandtab
-autocmd FileType cpp,hpp set noexpandtab | set shiftwidth=4 | set tabstop=4
+autocmd FileType cpp,hpp set expandtab | set shiftwidth=4 | set softtabstop=4
 autocmd FileType c,h set noexpandtab | set shiftwidth=8 | set tabstop=8
 autocmd FileType python set expandtab | set shiftwidth=4 | set softtabstop=4
 autocmd FileType sh set expandtab | set shiftwidth=2 | set softtabstop=2
