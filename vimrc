@@ -14,6 +14,7 @@ autocmd FileType c,h set noexpandtab | set shiftwidth=8 | set tabstop=8
 autocmd FileType python set expandtab | set shiftwidth=4 | set softtabstop=4
 autocmd FileType sh set expandtab | set shiftwidth=2 | set softtabstop=2
 autocmd FileType bash set expandtab | set shiftwidth=2 | set softtabstop=2
+autocmd BufNewFile,BufRead Jenkinsfile setf groovy | set expandtab | set shiftwidth=2 | set softtabstop=2
 
 
 " Match extra whitespaces and spaces before tabs
